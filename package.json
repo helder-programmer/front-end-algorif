@@ -25,6 +25,7 @@
     "@mui/system": "5.10.5",
     "@mui/x-date-pickers": "^5.0.2",
     "@zalter/identity-js": "1.2.1",
+    "axios": "^1.5.0",
     "chart.js": "3.9.1",
     "codemirror": "^5.65.9",
     "date-fns": "2.29.3",
@@ -33,6 +34,7 @@
     "formik": "2.2.9",
     "nanoid": "^4.0.2",
     "next": "12.3.0",
+    "nookies": "^2.5.2",
     "nprogress": "0.2.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
@@ -41,6 +43,7 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.2",
     "autoprefixer": "^10.4.12",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
