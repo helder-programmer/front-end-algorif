@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useFormik } from 'formik';
+import Router from 'next/router';
 import * as Yup from 'yup';
 import {
     Box,
@@ -13,21 +14,21 @@ import {
     Typography
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import CustomTextField from '../components/customTextField';
+import { UserService } from '@/services/auth';
 
 const Register = () => {
-
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const formik = useFormik({
         initialValues: {
             email: '',
-            userName: '',
+            username: '',
             password: '',
             city: '',
             state: '',
-            teacher: false,
+            isTeacher: false,
             policy: false
         },
         validationSchema: Yup.object({
@@ -36,7 +37,7 @@ const Register = () => {
                 .email('Deve ser um e-mail válido')
                 .max(255)
                 .required('E-mail é obrigatório'),
-            userName: Yup
+            username: Yup
                 .string()
                 .max(255)
                 .required('Nome de usuário é obrigatório'),
@@ -51,7 +52,7 @@ const Register = () => {
             city: Yup
                 .string()
                 .max(255),
-            teacher: Yup
+            isTeacher: Yup
                 .boolean(),
             policy: Yup
                 .boolean()
@@ -60,8 +61,24 @@ const Register = () => {
                     'Este campo deve ser verificado'
                 )
         }),
-        onSubmit: () => {
+        onSubmit: async () => {
+            try {
+                setIsLoading(true);
+                await UserService.register({
+                    name: formik.values.username,
+                    email: formik.values.email,
+                    password: formik.values.password,
+                    state: formik.values.state,
+                    isTeacher: formik.values.isTeacher
+                });
 
+                setIsLoading(false);
+
+                Router.push('/login');
+            } catch (err: any) {
+                console.log(err);
+                setIsLoading(false);
+            }
         }
     });
 
@@ -90,7 +107,7 @@ const Register = () => {
                             Painel inicial
                         </Button>
                     </NextLink>
-                    <form onSubmit={() => formik.handleSubmit()}>
+                    <form onSubmit={event => formik.handleSubmit(event)}>
                         <Box sx={{ my: 3 }}>
                             <Typography
                                 color="textPrimary"
@@ -110,7 +127,7 @@ const Register = () => {
                             type="text"
                             formik={formik}
                             label="Nome de usuário"
-                            name="userName"
+                            name="username"
                         />
                         <CustomTextField
                             type="email"
@@ -136,7 +153,7 @@ const Register = () => {
                                 type="text"
                                 formik={formik}
                                 label="Estado"
-                                name="state"                                
+                                name="state"
                             />
                             <TextField
                                 type="text"
@@ -163,7 +180,7 @@ const Register = () => {
                             <div>
                                 <div className='flex items-center'>
                                     <Checkbox
-                                        checked={formik.values.teacher}
+                                        checked={formik.values.isTeacher}
                                         name="teacher"
                                         onChange={formik.handleChange}
                                     />
@@ -203,9 +220,9 @@ const Register = () => {
                                 </div>
                             </div>
                         </Box>
-                        {Boolean(formik.touched.teacher && formik.errors.teacher) && (
+                        {Boolean(formik.touched.isTeacher && formik.errors.isTeacher) && (
                             <FormHelperText error>
-                                {formik.errors.teacher}
+                                {formik.errors.isTeacher}
                             </FormHelperText>
                         )}
                         {Boolean(formik.touched.policy && formik.errors.policy) && (
@@ -216,18 +233,11 @@ const Register = () => {
                         <Box sx={{ py: 2 }}>
                             <Button
                                 color="primary"
-                                disabled={isSubmitting}
+                                disabled={isLoading}
                                 fullWidth
                                 size="large"
                                 type="submit"
                                 variant="contained"
-                                onClick={() => {
-                                    formik.handleSubmit();
-                                    setIsSubmitting(true);
-                                    setTimeout(() => {
-                                        setIsSubmitting(false);
-                                    }, 3000);
-                                }}
                             >
                                 Inscreva-se agora
                             </Button>

@@ -15,9 +15,10 @@ type Props = {
     readOnly?: boolean;
     disabled?: boolean;
     onBlur?: any;
+    required?: boolean;
 }
 
-const CustomTextField = ({ formik, label, name, value, helperText, select, options, multiline, rows, readOnly, disabled, type, onBlur }: Props) => (
+const CustomTextField = ({ formik, label, name, value, helperText, select, options, multiline, rows, readOnly, disabled, type, onBlur, required }: Props) => (
     <TextField
         error={Boolean(formik.touched[name] && formik.errors[name])}
         helperText={helperText || (formik.touched[name] && formik.errors[name])}
@@ -25,7 +26,7 @@ const CustomTextField = ({ formik, label, name, value, helperText, select, optio
         label={label}
         name={name}
         onChange={formik.handleChange}
-        required
+        required={required}
         margin="normal"
         disabled={disabled}
         type={type}

@@ -7,9 +7,12 @@ import { Box, Button, Container, Link, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Logo } from '../components/logo';
 import CustomTextField from '../components/customTextField';
+import { useAuth } from '@/contexts/auth';
 
 const Login = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const auth = useAuth();
+
 
     const formik = useFormik({
         initialValues: {
@@ -27,7 +30,15 @@ const Login = () => {
                 .max(255)
                 .required('A senha é obrigatória!')
         }),
-        onSubmit: () => {
+        onSubmit: async () => {
+            try {
+                const { email, password } = formik.values;
+                setIsLoading(true);
+                await auth.signIn(email, password);
+                setIsLoading(false);
+            } catch (err: any) {
+                console.log(err);
+            }
         }
     });
 
@@ -46,7 +57,7 @@ const Login = () => {
                 }}
             >
                 <Container maxWidth="sm">
-                    <form>
+                    <form onSubmit={event => formik.handleSubmit(event)}>
                         <Box sx={{ my: 1 }}>
                             <Typography
                                 color="textPrimary"
@@ -82,18 +93,11 @@ const Login = () => {
                         <Box sx={{ py: 2 }}>
                             <Button
                                 color="primary"
-                                disabled={isSubmitting}
+                                disabled={isLoading}
                                 fullWidth
                                 size="large"
                                 type="submit"
                                 variant="contained"
-                                onClick={() => {
-                                    formik.handleSubmit();
-                                    setIsSubmitting(true);
-                                    setTimeout(() => {
-                                        setIsSubmitting(false);
-                                    }, 2000);
-                                }}
                             >
                                 Entrar
                             </Button>
