@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { FormEvent, useState } from 'react';
-import CustomTextField from '../components/customTextField';
+import CustomTextField from '../components/common/customTextField';
 import { UserService } from '@/services/auth';
 
 const Register = () => {

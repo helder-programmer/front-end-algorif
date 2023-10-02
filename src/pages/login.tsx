@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, Button, Container, Link, Typography } from '@mui/material';
 import { useState } from 'react';
-import { Logo } from '../components/logo';
-import CustomTextField from '../components/customTextField';
+import { Logo } from '../components/common/logo';
+import CustomTextField from '../components/common/customTextField';
 import { useAuth } from '@/contexts/auth';
 
 const Login = () => {
