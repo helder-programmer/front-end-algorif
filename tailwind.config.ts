@@ -9,6 +9,7 @@ const config: Config = {
     corePlugins: {
         preflight: false,
     },
+    important: true,
     theme: {
         extend: {},
         screens: {

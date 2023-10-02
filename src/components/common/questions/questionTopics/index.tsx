@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 
 import Loader from '../../loader';
 import { QuestionTopicService } from '@/services/questionTopic';
+import { theme } from '@/styles';
 
 export const QuestionsTopics = () => {
     const [topics, setTopics] = useState<IQuestionTopic[]>([]);
@@ -39,18 +40,18 @@ export const QuestionsTopics = () => {
                 {topics ?
                     <Grid className='sm:grid-cols-2 grid-cols-1' sx={{ display: 'grid', justifyContent: 'space-between', gap: 1 }} width="100%">
                         {topics.map(topic => (
-                            <button key={`${topic.topicId}`}>
+                            <div key={`${topic.topicId}`} className='border border-gray-500 border-solid flex justify-center w-full p-3 hover:border-green-500'>
                                 <Link href={`/tasks/${topic}`}>
-                                    <Typography className='border p-3 border-gray-500 hover:border-green-500 bg-transparent'>
+                                    <Typography sx={{color: theme => theme.palette.text.primary}}>
                                         {topic.name}
                                     </Typography>
                                 </Link>
-                            </button>
+                            </div>
                         ))}
                     </Grid>
                     : <Loader />
                 }
             </CardContent>
         </Card>
-    )
+    );
 }

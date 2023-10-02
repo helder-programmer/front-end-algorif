@@ -64,7 +64,7 @@ function AccountPopover({ anchorEl, onClose, open, ...other }: IProps) {
                     }
                 }}
             >
-                <MenuItem onClick={logout}>Sair</MenuItem>
+                <MenuItem onClick={() => logout()}>Sair</MenuItem>
             </MenuList>
         </Popover>
     );

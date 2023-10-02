@@ -107,7 +107,7 @@ const Register = () => {
                             Painel inicial
                         </Button>
                     </NextLink>
-                    <form onSubmit={event => formik.handleSubmit(event)}>
+                    <form onSubmit={formik.handleSubmit}>
                         <Box sx={{ my: 3 }}>
                             <Typography
                                 color="textPrimary"

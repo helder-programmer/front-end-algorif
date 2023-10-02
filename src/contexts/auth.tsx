@@ -24,9 +24,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 
     useEffect(() => {
-        const { 'alorif-token': token } = parseCookies();
+        const { 'algorif-token': token } = parseCookies();
 
-        
+
         if (token) {
             AuthService.recoverUserInformations().then(user => {
                 setUser(user);
@@ -54,8 +54,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const logout = () => {
         setUser(null);
-        destroyCookie(undefined, 'algorif-cookie');
-        Router.reload();
+        destroyCookie({}, 'algorif-token', {
+            path: '/'
+        })
     }
 
 

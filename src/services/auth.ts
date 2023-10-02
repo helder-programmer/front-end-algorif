@@ -8,13 +8,21 @@ type SignResponse = {
 }
 
 interface IRegisterParams {
-    name: string;      
-    email: string;     
-    password: string;  
-    state?: string;     
-    city?: string;      
+    name: string;
+    email: string;
+    password: string;
+    state?: string;
+    city?: string;
     phone?: string;
     isTeacher: boolean;
+}
+
+interface IUpdateParams {
+    name: string;
+    email: string;
+    state?: string;
+    city?: string;
+    phone?: string;
 }
 
 
@@ -30,6 +38,11 @@ export const AuthService = {
     },
     recoverUserInformations: async () => {
         const response = await Api.get<IUser>('/users/recoverUserInformations');
+        return response.data;
+    },
+
+    update: async (data: IUpdateParams) =>  {
+        const response = await Api.put<IUser>('/users', data);
         return response.data;
     }
 }
