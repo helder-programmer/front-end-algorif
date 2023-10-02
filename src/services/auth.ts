@@ -18,7 +18,7 @@ interface IRegisterParams {
 }
 
 
-export const UserService = {
+export const AuthService = {
     signIn: async (email: string, password: string) => {
         const response = await Api.post<SignResponse>('/users/login', { email, password });
         return response.data;
@@ -26,6 +26,10 @@ export const UserService = {
 
     register: async (data: IRegisterParams) => {
         const response = await Api.post<IUser>('/users/register', data);
+        return response.data;
+    },
+    recoverUserInformations: async () => {
+        const response = await Api.get<IUser>('/users/recoverUserInformations');
         return response.data;
     }
 }

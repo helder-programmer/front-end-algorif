@@ -1,9 +1,9 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react";
-import { destroyCookie, setCookie } from "nookies";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import Router from "next/router";
 
+import { AuthService } from "@/services/auth";
 import { IUser } from "@/domain/IUser";
-import { UserService } from "@/services/auth";
 
 interface IAuthContext {
     signIn(email: string, password: string): Promise<void>;
@@ -23,8 +23,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const isAuthneticated = !!user;
 
 
+    useEffect(() => {
+        const { 'alorif-token': token } = parseCookies();
+
+        
+        if (token) {
+            AuthService.recoverUserInformations().then(user => {
+                setUser(user);
+                console.log(user);
+            }).catch(err => {
+                console.log('Invalid Token');
+            })
+        }
+    }, []);
+
+
     const signIn = async (email: string, password: string) => {
-        const { user, token } = await UserService.signIn(email, password);
+        const { user, token } = await AuthService.signIn(email, password);
 
         setCookie(undefined, 'algorif-token', token, {
             maxAge: 60 * 60 * 1, //1hour

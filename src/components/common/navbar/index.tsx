@@ -8,12 +8,12 @@ import { UserCircle as UserCircleIcon } from '@/icons/userCircle';
 import AccountPopover from './accountPopover';
 
 interface IProps {
-    onSidebarOpen: Dispatch<SetStateAction<boolean>>;
-    other: any;
+    setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+    other?: any;
 }
 
 
-function Navbar({ onSidebarOpen, ...other }: IProps) {
+function Navbar({ setSidebarOpen, ...other }: IProps) {
     const [hideNavbar, setHideNavbar] = useState(false);
 
     useEffect(() => {
@@ -60,9 +60,9 @@ function Navbar({ onSidebarOpen, ...other }: IProps) {
                     }}
                 >
                     <IconButton
-                        onClick={() => onSidebarOpen(true)}
+                        onClick={() => setSidebarOpen(true)}
                         sx={{
-                            color: "neutral.200",
+                            color: "primary.200",
                             display: {
                                 xs: 'inline-flex',
 
@@ -73,11 +73,8 @@ function Navbar({ onSidebarOpen, ...other }: IProps) {
                     </IconButton>
 
                     <Box sx={{ px: 1 }} />
-                    <NextLink
-                        href="/"
-                        passHref
-                    >
-                        <a className='hidden xs:block'>
+                    <NextLink href="/" passHref>
+                        <a className="flex align-center">
                             <Logo viewWidth={490} width={190} height={135} imageWidth={453} />
                         </a>
                     </NextLink>

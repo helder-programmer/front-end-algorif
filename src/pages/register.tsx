@@ -16,7 +16,7 @@ import {
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { FormEvent, useState } from 'react';
 import CustomTextField from '../components/common/customTextField';
-import { UserService } from '@/services/auth';
+import { AuthService } from '@/services/auth';
 
 const Register = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +64,7 @@ const Register = () => {
         onSubmit: async () => {
             try {
                 setIsLoading(true);
-                await UserService.register({
+                await AuthService.register({
                     name: formik.values.username,
                     email: formik.values.email,
                     password: formik.values.password,

@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/system';
+import { createTheme } from '@mui/material/styles';
 
 export const theme = createTheme({
     breakpoints: {
@@ -145,7 +145,16 @@ export const theme = createTheme({
 
     },
     palette: {
-        grey: {
+        background: {
+            default: '#111827',
+            paper: '#1F2937',
+        },
+        divider: '#111827',
+        primary: {
+            main: '#21a87b',
+            light: '#3FC79A',
+            dark: '#1f2d37',
+            contrastText: '#FFFFFF',
             100: '#F3F4F6',
             200: '#E5E7EB',
             300: '#D1D5DB',
@@ -157,18 +166,6 @@ export const theme = createTheme({
             900: '#111827',
             // 1000: '#584A73',
             // 1100: '#7509e8'
-        },
-
-        background: {
-            default: '#111827',
-            paper: '#1F2937',
-        },
-        divider: '#111827',
-        primary: {
-            main: '#21a87b',
-            light: '#3FC79A',
-            dark: '#1f2d37',
-            contrastText: '#FFFFFF'
         },
         secondary: {
             main: '#5048E5',

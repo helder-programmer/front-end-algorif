@@ -6,9 +6,9 @@ import { Box, Button, ListItem } from '@mui/material';
 interface IProps {
     href: string;
     icon: ReactNode;
-    title: string;
-    titleLabel: string;
-    others: any;
+    title?: string;
+    titleLabel?: string;
+    others?: any;
 }
 
 
@@ -39,7 +39,7 @@ function NavItem({ href, icon, title, titleLabel, ...others }: IProps) {
                     sx={{
                         backgroundColor: active ? 'rgba(255,255,255, 0.08)' : '',
                         borderRadius: 1,
-                        color: active ? 'primary.main' : 'neutral.300',
+                        color: active ? 'primary.main' : 'primary.300',
                         fontWeight: active ? 'fontWeightBold' : '',
                         justifyContent: 'flex-start',
                         px: 3.5,
@@ -47,7 +47,7 @@ function NavItem({ href, icon, title, titleLabel, ...others }: IProps) {
                         textTransform: 'none',
                         width: '100%',
                         '& .MuiButton-startIcon': {
-                            color: active ? 'primary.main' : 'neutral.400'
+                            color: active ? 'primary.main' : 'primary.400'
                         },
                         '&:hover': {
                             backgroundColor: 'rgba(255,255,255, 0.08)'

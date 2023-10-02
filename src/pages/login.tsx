@@ -38,6 +38,7 @@ const Login = () => {
                 setIsLoading(false);
             } catch (err: any) {
                 console.log(err);
+                setIsLoading(false);
             }
         }
     });
