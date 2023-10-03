@@ -47,17 +47,12 @@ const Account = () => {
                 const { name, email, phone, state, city } = formik.values;
                 const updatedUser = await AuthService.update({ name, email, phone, state, city });
                 setUser(updatedUser);
-                console.log(updatedUser);
                 Router.push('/questions');
             } catch (err: any) {
                 console.log(err);
             }
         }
     });
-
-    useEffect(() => {
-
-    }, []);
 
     return (
         <AppLayout>

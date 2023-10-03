@@ -42,6 +42,7 @@
     "yup": "0.32.11"
   },
   "devDependencies": {
+    "@types/codemirror": "^5.60.10",
     "@types/cookie": "^0.5.2",
     "@types/node": "20.7.0",
     "autoprefixer": "^10.4.12",

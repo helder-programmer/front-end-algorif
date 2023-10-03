@@ -1,6 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
-import Router from "next/router";
 
 import { AuthService } from "@/services/auth";
 import { IUser } from "@/domain/IUser";
@@ -26,14 +25,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const { 'algorif-token': token } = parseCookies();
 
-
         if (token) {
             AuthService.recoverUserInformations().then(user => {
                 setUser(user);
                 console.log(user);
             }).catch(err => {
                 console.log('Invalid Token');
-            })
+            });
         }
     }, []);
 
@@ -41,14 +39,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const signIn = async (email: string, password: string) => {
         const { user, token } = await AuthService.signIn(email, password);
 
-        setCookie(undefined, 'algorif-token', token, {
+        setCookie({}, 'algorif-token', token, {
             maxAge: 60 * 60 * 1, //1hour
             path: '/'
         });
 
         setUser(user);
-        console.log(token);
-        Router.reload();
     }
 
 
@@ -56,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(null);
         destroyCookie({}, 'algorif-token', {
             path: '/'
-        })
+        });
     }
 
 

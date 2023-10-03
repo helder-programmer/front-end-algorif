@@ -36,6 +36,7 @@ export const AuthService = {
         const response = await Api.post<IUser>('/users/register', data);
         return response.data;
     },
+    
     recoverUserInformations: async () => {
         const response = await Api.get<IUser>('/users/recoverUserInformations');
         return response.data;

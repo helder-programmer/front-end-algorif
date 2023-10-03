@@ -181,7 +181,7 @@ const Register = () => {
                                 <div className='flex items-center'>
                                     <Checkbox
                                         checked={formik.values.isTeacher}
-                                        name="teacher"
+                                        name="isTeacher"
                                         onChange={formik.handleChange}
                                     />
                                     <Typography
