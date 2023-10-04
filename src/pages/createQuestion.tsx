@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import Head from "next/head";
 import CodeMirror from '@uiw/react-codemirror';
@@ -10,6 +10,10 @@ import { StreamLanguage } from "@codemirror/language";
 
 import AppLayout from "@/components/layouts/appLayout.tsx";
 import CustomTextField from "@/components/common/customTextField";
+import { QuestionTopicService } from "@/services/questionTopic";
+import { QuestionsTopics } from "@/components/common/questions/questionTopics";
+import { IQuestionTopic } from "@/domain/IQuestionTopic";
+import { IQuestionDifficulty } from "@/domain/IQuestionDifficulty";
 
 
 
@@ -19,6 +23,9 @@ const codeJs = "function main(/*variáveisDeEntradas*/) {\n    return\n} \n\ncon
 
 function CreateQuestion() {
     const [isPython, setPython] = useState(false);
+    const [topics, setTopics] = useState<IQuestionTopic[]>([]);
+    const [difficulties, setDifficulties] = useState<IQuestionDifficulty[]>([]);
+
 
     const formik = useFormik({
         initialValues: {
@@ -64,7 +71,23 @@ function CreateQuestion() {
         onSubmit: async () => {
 
         }
-    })
+    });
+
+
+
+    const getTopics = async () => {
+        const topics = await QuestionTopicService.getAll();
+        setTopics(topics);
+    }
+
+
+    const getDifficulties = async () => {
+        const difficulties = await QUestion
+    }
+
+    useEffect(() => {
+        QuestionsTopics
+    }, []);
 
     return (
         <AppLayout>

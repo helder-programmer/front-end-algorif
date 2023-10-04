@@ -1,4 +1,4 @@
-interface IQuestionTopic {
+export interface IQuestionTopic {
     topicId: string;
     name: string;
     createdAt: Date;

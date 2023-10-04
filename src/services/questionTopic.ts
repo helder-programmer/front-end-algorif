@@ -1,3 +1,4 @@
+import { IQuestionTopic } from "@/domain/IQuestionTopic";
 import { Api } from "./api"
 
 
