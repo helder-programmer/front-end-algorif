@@ -7,7 +7,6 @@ import AppLayout from '@/components/layouts/appLayout.tsx';
 import CustomTextField from '@/components/common/customTextField';
 import { AuthService } from '@/services/auth';
 import Router from 'next/router';
-import { useEffect } from 'react';
 
 const Account = () => {
     const { user, setUser } = useAuth();
@@ -25,18 +24,16 @@ const Account = () => {
             name: Yup
                 .string()
                 .required()
-                .max(255),
-            // .required('Usuário é obrigatório'),
+                .max(255)
+                .required('Usuário é obrigatório'),
             state: Yup
                 .string()
                 .nullable()
                 .max(255),
-            // .required('Estado é obrigatório'),
             city: Yup
                 .string()
                 .nullable()
                 .max(255),
-            // .required('Cidade é obrigatório'),
             phone: Yup
                 .string()
                 .nullable()

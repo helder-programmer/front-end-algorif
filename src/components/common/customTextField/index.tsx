@@ -4,7 +4,7 @@ import { TextField } from "@mui/material";
 type Props = {
     formik?: any;
     name: string;
-    type: string;
+    type?: string;
     label?: string;
     value?: string;
     helperText?: string;
