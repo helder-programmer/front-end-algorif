@@ -18,13 +18,12 @@ import { FormEvent, useState } from 'react';
 import CustomTextField from '../components/common/customTextField';
 import { AuthService } from '@/services/auth';
 
-const Register = () => {
-    const [isLoading, setIsLoading] = useState(false);
+function Register() {
 
     const formik = useFormik({
         initialValues: {
             email: '',
-            username: '',
+            name: '',
             password: '',
             city: '',
             state: '',
@@ -37,7 +36,7 @@ const Register = () => {
                 .email('Deve ser um e-mail válido')
                 .max(255)
                 .required('E-mail é obrigatório'),
-            username: Yup
+            name: Yup
                 .string()
                 .max(255)
                 .required('Nome de usuário é obrigatório'),
@@ -63,21 +62,10 @@ const Register = () => {
         }),
         onSubmit: async () => {
             try {
-                setIsLoading(true);
-                await AuthService.register({
-                    name: formik.values.username,
-                    email: formik.values.email,
-                    password: formik.values.password,
-                    state: formik.values.state,
-                    isTeacher: formik.values.isTeacher
-                });
-
-                setIsLoading(false);
-
+                await AuthService.register(formik.values);
                 Router.push('/login');
             } catch (err: any) {
                 console.log(err);
-                setIsLoading(false);
             }
         }
     });
@@ -127,7 +115,7 @@ const Register = () => {
                             type="text"
                             formik={formik}
                             label="Nome de usuário"
-                            name="username"
+                            name="name"
                         />
                         <CustomTextField
                             type="email"
@@ -233,7 +221,7 @@ const Register = () => {
                         <Box sx={{ py: 2 }}>
                             <Button
                                 color="primary"
-                                disabled={isLoading}
+                                disabled={formik.isSubmitting}
                                 fullWidth
                                 size="large"
                                 type="submit"
@@ -265,6 +253,6 @@ const Register = () => {
             </Box>
         </>
     );
-};
+}
 
 export default Register;

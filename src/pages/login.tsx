@@ -10,7 +10,6 @@ import CustomTextField from '../components/common/customTextField';
 import { useAuth } from '@/contexts/auth';
 
 const Login = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const auth = useAuth();
 
 
@@ -33,12 +32,9 @@ const Login = () => {
         onSubmit: async () => {
             try {
                 const { email, password } = formik.values;
-                setIsLoading(true);
                 await auth.signIn(email, password);
-                setIsLoading(false);
             } catch (err: any) {
                 console.log(err);
-                setIsLoading(false);
             }
         }
     });
@@ -94,7 +90,7 @@ const Login = () => {
                         <Box sx={{ py: 2 }}>
                             <Button
                                 color="primary"
-                                disabled={isLoading}
+                                disabled={formik.isSubmitting}
                                 fullWidth
                                 size="large"
                                 type="submit"
