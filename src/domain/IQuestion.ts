@@ -1,4 +1,5 @@
 import { IQuestionDifficulty } from "./IQuestionDifficulty";
+import { IQuestionTest } from "./IQuestionTest";
 
 export interface IQuestion {
     questionId: string;
@@ -13,4 +14,5 @@ export interface IQuestion {
     difficultyId: string;
     userCreatorId: string;
     difficulty?: IQuestionDifficulty;
+    tests?: IQuestionTest[];
 }

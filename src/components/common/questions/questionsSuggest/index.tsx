@@ -10,7 +10,7 @@ import Loader from '../../loader';
 
 
 function QuestionsSuggest() {
-    const [unansweredQuestions, setUnansweredQuestions] = useState<IQuestion[]>([]);
+    const [unansweredQuestions, setUnansweredQuestions] = useState<IQuestion[] | null>([]);
 
     const getQuestions = async () => {
         const questions = await QuestionService.getUnansweredQuestions();
@@ -72,9 +72,9 @@ function QuestionsSuggest() {
                                     </Link>
                                 );
                             })
-                        ) : (
-                            <Loader />
-                        )}
+                        )
+                            : <Loader />
+                        }
                     </Grid>
                 )}
             </CardContent>

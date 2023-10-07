@@ -25,6 +25,7 @@ function CodeEditor({ isPython, width, height, onChange, value }: IProps) {
             height={height}
             extensions={[isPython ? python() : javascript()]}
             onChange={onChange}
+            style={{ fontSize: '13pt' }}
         />
     );
 }

@@ -188,30 +188,32 @@ const Account = () => {
                                                     formik={formik}
                                                 />
                                             </Grid>
-                                            <Grid
-                                                item
-                                                md={6}
-                                                xs={12}
-                                            >
-                                                <CustomTextField
-                                                    type="text"
-                                                    label="Estado"
-                                                    name="state"
-                                                    formik={formik}
-                                                />
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                md={6}
-                                                xs={12}
-                                            >
-                                                <CustomTextField
-                                                    type="text"
-                                                    label="Cidade"
-                                                    name="city"
-                                                    formik={formik}
-                                                />
-                                            </Grid>
+                                            <div className="flex flex-row w-full gap-[15px]">
+                                                <Grid
+                                                    item
+                                                    md={6}
+                                                    xs={12}
+                                                >
+                                                    <CustomTextField
+                                                        type="text"
+                                                        label="Estado"
+                                                        name="state"
+                                                        formik={formik}
+                                                    />
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    md={6}
+                                                    xs={12}
+                                                >
+                                                    <CustomTextField
+                                                        type="text"
+                                                        label="Cidade"
+                                                        name="city"
+                                                        formik={formik}
+                                                    />
+                                                </Grid>
+                                            </div>
                                         </Grid>
                                     </CardContent>
                                     <Divider />

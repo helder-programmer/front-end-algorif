@@ -26,5 +26,9 @@ export const QuestionService = {
     getUnansweredQuestions: async () => {
         const response = await Api.get('/questions/getUnansweredQuestions');
         return response.data;
+    },
+    getOne: async (questionId: string) => {
+        const response = await Api.get(`/questions/${questionId}`);
+        return response.data;
     }
 }

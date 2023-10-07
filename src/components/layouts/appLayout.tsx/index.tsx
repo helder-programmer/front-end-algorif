@@ -15,7 +15,7 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
 }));
 
 function AppLayout({ children }: { children: ReactNode }) {
-    const [isSidebarOpen, setSidebarOpen] = useState(true);
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     return (
         <>
