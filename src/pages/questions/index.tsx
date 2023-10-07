@@ -2,8 +2,9 @@ import Head from 'next/head';
 import { Box } from '@mui/material';
 import AppLayout from '@/components/layouts/appLayout.tsx';
 import { QuestionsTopics } from '@/components/common/questions/questionTopics';
+import QuestionsSuggest from '@/components/common/questions/questionsSuggest';
 
-function Topics() {
+function Questions() {
 
     return (
         <AppLayout>
@@ -24,12 +25,11 @@ function Topics() {
                     <div className="pt-8" />
                     {/* <SearchQuestion /> */}
                     <div className='pt-8' />
-                    {/* <QuestionsSuggest /> */}
-
+                    <QuestionsSuggest />
                 </div>
             </Box>
         </AppLayout>
     );
 }
 
-export default Topics;
+export default Questions;

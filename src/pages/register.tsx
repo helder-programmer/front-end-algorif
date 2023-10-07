@@ -14,11 +14,12 @@ import {
     Typography
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { FormEvent, useState } from 'react';
 import CustomTextField from '../components/common/customTextField';
 import { AuthService } from '@/services/auth';
 
 function Register() {
+
+
 
     const formik = useFormik({
         initialValues: {
@@ -30,6 +31,8 @@ function Register() {
             isTeacher: false,
             policy: false
         },
+        validateOnChange: false,
+        validateOnBlur: false,
         validationSchema: Yup.object({
             email: Yup
                 .string()
@@ -87,14 +90,6 @@ function Register() {
                 }}
             >
                 <Container maxWidth="sm">
-                    <NextLink
-                        href="/"
-                        passHref
-                    >
-                        <Button component="a" startIcon={<ArrowBackIcon fontSize="small" />}>
-                            Painel inicial
-                        </Button>
-                    </NextLink>
                     <form onSubmit={formik.handleSubmit}>
                         <Box sx={{ my: 3 }}>
                             <Typography
@@ -111,50 +106,71 @@ function Register() {
                                 Use seu email para criar uma nova conta
                             </Typography>
                         </Box>
-                        <CustomTextField
-                            type="text"
-                            formik={formik}
-                            label="Nome de usuário"
-                            name="name"
-                        />
-                        <CustomTextField
-                            type="email"
-                            formik={formik}
-                            label="Endereço de e-mail"
-                            name="email"
-                        />
                         <TextField
-                            error={Boolean(formik.touched.password && formik.errors.password)}
-                            fullWidth
-                            helperText={formik.touched.password && formik.errors.password}
-                            label="Senha"
+                            label="Nome de usuário"
+                            type="text"
+                            name="name"
                             margin="normal"
-                            name="password"
+                            variant="outlined"
+                            fullWidth
+                            error={Boolean(formik.touched.name && formik.errors.name)}
+                            helperText={formik.touched.name && formik.errors.name}
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            type="password"
-                            value={formik.values.password}
+                            value={formik.values.name}
+                        />
+                        <TextField
+                            label="Endereço de e-mail"
+                            type="text"
+                            name="email"
+                            margin="normal"
                             variant="outlined"
+                            fullWidth
+                            error={Boolean(formik.touched.email && formik.errors.email)}
+                            helperText={formik.touched.email && formik.errors.email}
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
+                        />
+                        <TextField
+                            label="Senha"
+                            type="password"
+                            name="password"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth
+                            error={Boolean(formik.touched.password && formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
                         />
                         <div className='block sm:flex gap-3'>
-                            <CustomTextField
-                                type="text"
-                                formik={formik}
+                            <TextField
                                 label="Estado"
+                                type="text"
                                 name="state"
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
+                                error={Boolean(formik.touched.state && formik.errors.state)}
+                                helperText={formik.touched.state && formik.errors.state}
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                value={formik.values.state}
                             />
                             <TextField
+                                label="Cidade"
                                 type="text"
+                                name="city"
+                                margin="normal"
+                                variant="outlined"
+                                fullWidth
                                 error={Boolean(formik.touched.city && formik.errors.city)}
                                 helperText={formik.touched.city && formik.errors.city}
-                                fullWidth
-                                label="Cidade"
-                                margin="normal"
-                                name="city"
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                                 value={formik.values.city}
-                                variant="outlined"
                             />
                         </div>
                         <div id="error-message" className='text-red-500 p-1'></div>

@@ -6,6 +6,7 @@ import { Box } from '@mui/system';
 import Loader from '../../loader';
 import { QuestionTopicService } from '@/services/questionTopic';
 import { theme } from '@/styles';
+import { IQuestionTopic } from '@/domain/IQuestionTopic';
 
 export const QuestionsTopics = () => {
     const [topics, setTopics] = useState<IQuestionTopic[]>([]);
@@ -21,7 +22,7 @@ export const QuestionsTopics = () => {
     }, []);
 
     return (
-        <Card sx={{ backgroundColor: theme => theme.palette.background.paper }}>
+        <Card component='section' sx={{ backgroundColor: theme => theme.palette.background.paper }}>
             <CardContent>
                 <Grid
                     container

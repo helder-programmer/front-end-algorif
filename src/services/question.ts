@@ -20,8 +20,11 @@ interface ICreateQuestionParams {
 
 export const QuestionService = {
     create: async (data: ICreateQuestionParams) => {
-        console.log(data);
-        // const response = await Api.post('/questions', data);
-        // return response.data;
+        const response = await Api.post('/questions', data);
+        return response.data;
+    },
+    getUnansweredQuestions: async () => {
+        const response = await Api.get('/questions/getUnansweredQuestions');
+        return response.data;
     }
 }

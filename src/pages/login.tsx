@@ -1,12 +1,10 @@
 import Head from 'next/head';
 import NextLink from 'next/link';
-import Router from 'next/router';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Box, Button, Container, Link, Typography } from '@mui/material';
-import { useState } from 'react';
+import { Box, Button, Container, Link, TextField, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+
 import { Logo } from '../components/common/logo';
-import CustomTextField from '../components/common/customTextField';
 import { useAuth } from '@/contexts/auth';
 
 const Login = () => {
@@ -18,6 +16,8 @@ const Login = () => {
             email: '',
             password: ''
         },
+        validateOnChange: false,
+        validateOnBlur: false,
         validationSchema: Yup.object({
             email: Yup
                 .string()
@@ -72,19 +72,31 @@ const Login = () => {
                                 Faça Login no Plataforma do AlgorIF
                             </Typography>
                         </Box>
-                        <CustomTextField
-                            label="Enderço de e-mail"
+                        <TextField
+                            label="Endereço de e-mail"
+                            type="text"
                             name="email"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth
+                            error={Boolean(formik.touched.email && formik.errors.email)}
+                            helperText={formik.touched.email && formik.errors.email}
                             onBlur={formik.handleBlur}
-                            type="email"
-                            formik={formik}
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
                         />
-                        <CustomTextField
+                        <TextField
                             label="Senha"
-                            name="password"
-                            onBlur={formik.handleBlur}
                             type="password"
-                            formik={formik}
+                            name="password"
+                            margin="normal"
+                            variant="outlined"
+                            fullWidth
+                            error={Boolean(formik.touched.password && formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                            onBlur={formik.handleBlur}
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
                         />
                         <div id="error-message" className='text-red-500 p-1'></div>
                         <Box sx={{ py: 2 }}>
