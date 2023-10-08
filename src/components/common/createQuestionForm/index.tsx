@@ -104,7 +104,7 @@ function CreateQuestionForm() {
         setDifficulties(difficulties);
     }
 
-    const codeEditorHandleChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
+    const handleCodeEditorChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
         formik.setValues({ ...formik.values, code: value });
     }, [formik]);
 
@@ -137,7 +137,7 @@ function CreateQuestionForm() {
 
     useEffect(() => {
         formik.setValues({ ...formik.values, code: isPython ? codePython : codeJs });
-    }, [isPython]);
+    }, [isPython, formik]);
 
 
     return (
@@ -239,7 +239,7 @@ function CreateQuestionForm() {
 
                     <CodeEditor
                         isPython={isPython}
-                        onChange={codeEditorHandleChange}
+                        onChange={handleCodeEditorChange}
                         width="60vw"
                         height="518px"
                         value={formik.values.code}

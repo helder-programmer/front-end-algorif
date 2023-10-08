@@ -30,7 +30,7 @@ export const QuestionsTopics = () => {
                     sx={{ justifyContent: 'space-between' }}
                 >
                     <Typography
-                        sx={{ pb: 3 }}
+                        className="pb-4"
                         color="textPrimary"
                         variant="h6"
                     >
@@ -41,8 +41,8 @@ export const QuestionsTopics = () => {
                 {topics.length ?
                     <Grid className='sm:grid-cols-2 grid-cols-1' sx={{ display: 'grid', justifyContent: 'space-between', gap: 1 }} width="100%">
                         {topics.map(topic => (
-                            <Link href={`/questions/${topic.topicId}`}>
-                                <div key={`${topic.topicId}`} className='cursor-pointer border border-gray-500 border-solid flex justify-center w-full p-3 hover:border-green-500'>
+                            <Link href={`/questions/${topic.topicId}`} key={`${topic.topicId}`}>
+                                <div className='cursor-pointer border border-gray-500 border-solid flex justify-center w-full p-3 hover:border-green-500'>
                                     <Typography sx={{ color: theme => theme.palette.text.primary }}>
                                         {topic.name}
                                     </Typography>

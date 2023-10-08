@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from "react";
+import { ViewUpdate } from "@uiw/react-codemirror";
+
 import { IQuestion } from "@/domain/IQuestion";
 import CodeEditor from "../codeEditor";
 import CodeChecker from "./codeChecker";
@@ -8,6 +11,14 @@ interface IProps {
 }
 
 function QuestionData({ question }: IProps) {
+    const [code, setCode] = useState('');
+
+
+    useEffect(() => { setCode(question.code) }, [question.code]);
+
+    const handleCodeEditorChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
+        setCode(value);
+    }, []);
 
     return (
         <div className="w-full flex lg:flex-row h-full">
@@ -19,14 +30,19 @@ function QuestionData({ question }: IProps) {
             </div>
 
             <div className="lg:w-[60%] w-full flex flex-col">
+
                 <CodeEditor
                     height="520px"
                     width="100%"
                     isPython={false}
-                    onChange={() => { }}
-                    value={question.code}
+                    onChange={handleCodeEditorChange}
+                    value={code}
                 />
-                <CodeChecker />
+
+                <CodeChecker
+                    userCode={code}
+                    question={question}
+                />
             </div>
         </div>
     );

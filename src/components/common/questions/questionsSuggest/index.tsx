@@ -22,10 +22,10 @@ function QuestionsSuggest() {
     }, []);
 
     return (
-        <Card component='section'>
+        <Card component='section' sx={{ backgroundColor: theme => theme.palette.background.paper }}>
             <CardContent>
                 <Grid container width="100%" sx={{ justifyContent: 'space-between' }}>
-                    <Typography sx={{ pb: 3 }} color="textPrimary" variant="h6">
+                    <Typography className="pb-4" variant="h6">
                         Recomendações
                     </Typography>
                 </Grid>

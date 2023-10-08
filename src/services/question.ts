@@ -18,6 +18,13 @@ interface ICreateQuestionParams {
 }
 
 
+interface IAnswerQuestionParams {
+    questionId: string;
+    isCorrectCode: boolean;
+    code: string;
+}
+
+
 export const QuestionService = {
     create: async (data: ICreateQuestionParams) => {
         const response = await Api.post('/questions', data);
@@ -29,6 +36,10 @@ export const QuestionService = {
     },
     getOne: async (questionId: string) => {
         const response = await Api.get(`/questions/${questionId}`);
+        return response.data;
+    },
+    answerQuestion: async ({ questionId, code, isCorrectCode }: IAnswerQuestionParams) => {
+        const response = await Api.put(`/questions/answer/${questionId}`, { code, isCorrectCode });
         return response.data;
     }
 }
