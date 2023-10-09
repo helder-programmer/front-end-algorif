@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import AppLayout from '@/components/layouts/appLayout.tsx';
 import { QuestionsTopics } from '@/components/common/questions/questionTopics';
 import QuestionsSuggest from '@/components/common/questions/questionsSuggest';
@@ -21,10 +21,8 @@ function Questions() {
                 }}
             >
                 <div className='px-[5%]'>
-                    <QuestionsTopics />
+                    <QuestionsTopics />                    
                     <div className="pt-8" />
-                    {/* <SearchQuestion /> */}
-                    <div className='pt-8' />
                     <QuestionsSuggest />
                 </div>
             </Box>

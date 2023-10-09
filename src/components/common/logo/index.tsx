@@ -1,10 +1,10 @@
 import { styled } from '@mui/material/styles';
 
 type Props = {
-    width: number;
-    imageWidth: number;
-    height: number;
-    viewWidth: number;
+    width: number | string;
+    imageWidth: number | string;
+    height: number | string;
+    viewWidth: number | string;
 }
 
 export const Logo = styled(({ height, imageWidth, viewWidth, width }: Props) => {

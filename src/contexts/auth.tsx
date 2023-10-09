@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
+import Router from "next/router";
 
 import { AuthService } from "@/services/auth";
 import { IUser } from "@/domain/IUser";
@@ -45,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
 
         setUser(user);
+        Router.push('/questions');
     }
 
 

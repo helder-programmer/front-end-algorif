@@ -7,6 +7,7 @@ import AppLayout from '@/components/layouts/appLayout.tsx';
 import CustomTextField from '@/components/common/customTextField';
 import { AuthService } from '@/services/auth';
 import Router from 'next/router';
+import { useEffect } from 'react';
 
 const Account = () => {
     const { user, setUser } = useAuth();
@@ -14,12 +15,14 @@ const Account = () => {
 
     const formik = useFormik({
         initialValues: {
-            name: user?.name || '',
-            email: user?.email || '',
-            phone: user?.phone || '',
-            state: user?.state || '',
-            city: user?.city || ''
+            name: '',
+            email: '',
+            phone: '',
+            state: '',
+            city: ''
         },
+        validateOnBlur: false,
+        validateOnChange: false,
         validationSchema: Yup.object({
             name: Yup
                 .string()
@@ -82,7 +85,7 @@ const Account = () => {
                             md={6}
                             xs={12}
                         >
-                            <Card sx={{ backgroundColor: 'background.paper' }}>
+                            <Card>
                                 <CardContent>
                                     <Box
                                         sx={{
@@ -112,7 +115,7 @@ const Account = () => {
                                     </Box>
                                 </CardContent>
                                 <Divider />
-                                {/* <CardActions>
+                                <CardActions>
                                     <Button
                                         fullWidth
                                         color="primary"
@@ -121,12 +124,12 @@ const Account = () => {
                                     >
                                         Carregar foto
                                         <input
-                                            onChange={handleFileUpload}
+                                            // onChange={handleFileUpload}
                                             hidden
                                             type="file"
                                         />
                                     </Button>
-                                </CardActions> */}
+                                </CardActions>
 
 
                             </Card>
@@ -145,10 +148,7 @@ const Account = () => {
                                     />
                                     <Divider />
                                     <CardContent>
-                                        <Grid
-                                            container
-                                            spacing={0.5}
-                                        >
+                                        <Grid container spacing={0.5}>
                                             <Grid
                                                 item
                                                 md={12}
@@ -163,31 +163,33 @@ const Account = () => {
                                                     name="name"
                                                 />
                                             </Grid>
-                                            <Grid
-                                                item
-                                                md={6}
-                                                xs={12}
-                                            >
-                                                <CustomTextField
-                                                    type="text"
-                                                    disabled
-                                                    label="Endereço de e-mail"
-                                                    name="email"
-                                                    formik={formik}
-                                                />
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                md={6}
-                                                xs={12}
-                                            >
-                                                <CustomTextField
-                                                    label="Número de telefone"
-                                                    name="phone"
-                                                    type="number"
-                                                    formik={formik}
-                                                />
-                                            </Grid>
+                                            <div className="flex flex-row w-full gap-[15px]">
+                                                <Grid
+                                                    item
+                                                    md={6}
+                                                    xs={12}
+                                                >
+                                                    <CustomTextField
+                                                        type="text"
+                                                        disabled
+                                                        label="Endereço de e-mail"
+                                                        name="email"
+                                                        formik={formik}
+                                                    />
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    md={6}
+                                                    xs={12}
+                                                >
+                                                    <CustomTextField
+                                                        label="Número de telefone"
+                                                        name="phone"
+                                                        type="number"
+                                                        formik={formik}
+                                                    />
+                                                </Grid>
+                                            </div>
                                             <div className="flex flex-row w-full gap-[15px]">
                                                 <Grid
                                                     item

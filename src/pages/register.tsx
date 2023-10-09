@@ -89,41 +89,38 @@ function Register() {
                     minHeight: '100%'
                 }}
             >
-                <Container maxWidth="sm">
+                <Container maxWidth="xs">
                     <form onSubmit={formik.handleSubmit}>
-                        <Box sx={{ my: 3 }}>
-                            <Typography
-                                color="textPrimary"
-                                variant="h4"
-                            >
+                        <div className="my-3 flex flex-col items-center">
+                            <Typography variant="h4">
                                 Criar uma nova conta
                             </Typography>
                             <Typography
-                                color="textSecondary"
+                                color={theme => theme.palette.text.secondary}
                                 gutterBottom
                                 variant="body2"
                             >
                                 Use seu email para criar uma nova conta
                             </Typography>
-                        </Box>
+                        </div>
                         <TextField
                             label="Nome de usuário"
                             type="text"
                             name="name"
-                            margin="normal"
+                            margin="dense"
                             variant="outlined"
                             fullWidth
                             error={Boolean(formik.touched.name && formik.errors.name)}
                             helperText={formik.touched.name && formik.errors.name}
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            value={formik.values.name}
+                            value={formik.values.name}                            
                         />
                         <TextField
                             label="Endereço de e-mail"
                             type="text"
                             name="email"
-                            margin="normal"
+                            margin="dense"
                             variant="outlined"
                             fullWidth
                             error={Boolean(formik.touched.email && formik.errors.email)}
@@ -136,7 +133,7 @@ function Register() {
                             label="Senha"
                             type="password"
                             name="password"
-                            margin="normal"
+                            margin="dense"
                             variant="outlined"
                             fullWidth
                             error={Boolean(formik.touched.password && formik.errors.password)}
@@ -150,7 +147,7 @@ function Register() {
                                 label="Estado"
                                 type="text"
                                 name="state"
-                                margin="normal"
+                                margin="dense"
                                 variant="outlined"
                                 fullWidth
                                 error={Boolean(formik.touched.state && formik.errors.state)}
@@ -163,7 +160,7 @@ function Register() {
                                 label="Cidade"
                                 type="text"
                                 name="city"
-                                margin="normal"
+                                margin="dense"
                                 variant="outlined"
                                 fullWidth
                                 error={Boolean(formik.touched.city && formik.errors.city)}
@@ -173,7 +170,7 @@ function Register() {
                                 value={formik.values.city}
                             />
                         </div>
-                        <div id="error-message" className='text-red-500 p-1'></div>
+                        <div id="error-message" className='text-red-500'></div>
                         <Box
                             sx={{
                                 alignItems: 'center',

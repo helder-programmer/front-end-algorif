@@ -53,44 +53,46 @@ const Login = () => {
                     minHeight: '100%'
                 }}
             >
-                <Container maxWidth="sm">
+                <Container maxWidth="xs">
                     <form onSubmit={event => formik.handleSubmit(event)}>
-                        <Box sx={{ my: 1 }}>
+                        <Box sx={{ my: 3 }}>
                             <Typography
                                 color="textPrimary"
                                 variant="h4"
                             >
-                                <div className='flex'>
-                                    <Logo viewWidth={1660} width={552} height={150} imageWidth={800} />
+                                <div className='flex justify-center'>
+                                    <Logo viewWidth={850} width={500} height={135} imageWidth={850} />
+                                    {/* viewWidth={1660} width={552} height={150} imageWidth={800} */}
                                 </div>
                             </Typography>
                             <Typography
-                                color="textSecondary"
-                                gutterBottom
-                                variant="body2"
+                                variant="h6"
+                                textAlign='center'
+                                color={theme => theme.palette.text.secondary}
+                                className="mt-2 tracking-tight"
                             >
-                                Faça Login no Plataforma do AlgorIF
+                                Faça login na plataforma do AlgorIF
                             </Typography>
                         </Box>
                         <TextField
                             label="Endereço de e-mail"
                             type="text"
-                            name="email"
-                            margin="normal"
+                            name="email"                        
                             variant="outlined"
+                            margin="dense"
                             fullWidth
                             error={Boolean(formik.touched.email && formik.errors.email)}
                             helperText={formik.touched.email && formik.errors.email}
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
-                            value={formik.values.email}
+                            value={formik.values.email}                            
                         />
                         <TextField
                             label="Senha"
                             type="password"
-                            name="password"
-                            margin="normal"
+                            name="password"                            
                             variant="outlined"
+                            margin="dense"
                             fullWidth
                             error={Boolean(formik.touched.password && formik.errors.password)}
                             helperText={formik.touched.password && formik.errors.password}
@@ -98,21 +100,22 @@ const Login = () => {
                             onChange={formik.handleChange}
                             value={formik.values.password}
                         />
-                        <div id="error-message" className='text-red-500 p-1'></div>
-                        <Box sx={{ py: 2 }}>
-                            <Button
-                                color="primary"
-                                disabled={formik.isSubmitting}
-                                fullWidth
-                                size="large"
-                                type="submit"
-                                variant="contained"
-                            >
-                                Entrar
-                            </Button>
-                        </Box>
+
+
+                        <Button
+                            color="primary"
+                            disabled={formik.isSubmitting}
+                            fullWidth
+                            size="large"
+                            type="submit"
+                            variant="contained"
+                            className="mb-2 mt-2"
+                        >
+                            Entrar
+                        </Button>
+
                         <Typography
-                            color="textSecondary"
+                            color={theme => theme.palette.text.secondary}
                             variant="body2"
                         >
                             Ainda não tem conta?
