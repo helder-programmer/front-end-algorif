@@ -1,32 +1,60 @@
 import { IQuestion } from "@/domain/IQuestion";
 import { QuestionService } from "@/services/question";
-import { Button } from "@mui/material";
+import { Button, ButtonGroup, Divider, Typography } from "@mui/material";
 import { ViewUpdate } from "@uiw/react-codemirror";
-import { useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 
 interface IProps {
     question: IQuestion;
     userCode: string;
+    isPython: boolean;
+    setIsPython: Dispatch<SetStateAction<boolean>>;
 }
 
-function CodeChecker({ question, userCode }: IProps) {
+function CodeChecker({ question, userCode, isPython, setIsPython }: IProps) {
     const [show, setShow] = useState(false);
     const [error, setError] = useState(false);
-    const [solved, setSolved] = useState(false);
     const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
     const [testResults, setTestResults] = useState([]);
     const [result, setResult] = useState('');
 
     // redefinir console.log para adicionar saída ao elemento de saída
     let consoleWritten: any[] = [];
-    const handleRun = () => {
+    const handleRun = async () => {
         console.log = (...args) => {
             consoleWritten.push(...args);
         };
-        outputResult();
+
+        // if (isPython) return await  
+        outputResultJs();
     }
 
-    const outputResult = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const outputResultPython = async () => {
+
+    }
+
+
+
+
+
+
+    const outputResultJs = () => {
         try {
             eval(userCode); // executar o código
             const result = consoleWritten.map(line => line).join("\n");
@@ -38,7 +66,7 @@ function CodeChecker({ question, userCode }: IProps) {
     };
 
     const submitQuestionAnswer = async () => {
-        checkQuestion();
+        checkQuestionJs();
         if (!isCorrectAnswer) return;
 
         await QuestionService.answerQuestion({
@@ -50,10 +78,7 @@ function CodeChecker({ question, userCode }: IProps) {
         alert('Questão respondida com sucesso!');
     }
 
-
-    const checkQuestion = () => {
-        // setVerificationTask(!verificationTask);
-
+    const checkQuestionJs = () => {
         let testsPassed = "\n let passedTests = []";
         let passed = "\n let passed = true";
 
@@ -106,6 +131,21 @@ function CodeChecker({ question, userCode }: IProps) {
     return (
         <section>
             <div className='px-4 py-2 flex gap-4 justify-end'>
+                <ButtonGroup
+                    className='mr-2'>
+                    <Button
+                        onClick={() => setIsPython(false)}
+                        variant={!isPython ? 'contained' : 'outlined'}
+                    >
+                        Javascript
+                    </Button>
+                    <Button
+                        onClick={() => setIsPython(true)}
+                        variant={isPython ? 'contained' : 'outlined'}
+                    >
+                        Python
+                    </Button>
+                </ButtonGroup>
                 <Button
                     variant='outlined'
                     onClick={handleRun}
@@ -122,20 +162,34 @@ function CodeChecker({ question, userCode }: IProps) {
                 </Button>
             </div>
 
-            <div id="output" className='bg-[#1F2937] border overflow-y-auto border-gray-700 lg:h-[250px] h-[200px] p-6'>
-                {result}
-            </div>
+            <section className='rounded-l-md shadow-lg bg-[#1F2937] border overflow-y-auto border-gray-700 lg:h-[250px] h-[200px] py-4'>
 
-            <div id="Verificado">
-                {show || error ? (
-                    <div
-                        className='flex flex-wrap py-2 gap-2 bg-[#1F2937] my-2 border border-gray-700'>
-                        {testResults.map((result, index) => (
-                            <div key={index} className={`${result ? 'border-green-600 bg-green-700' : 'border-red-600 bg-red-700'} border p-4 m-2 `} />
-                        ))}
-                    </div>
-                ) : null}
-            </div>
+                <div className="px-4 pb-2">
+                    <Typography
+                        variant="h5"
+                        className="m-0"
+                        component='h5'
+                    >
+                        Saída
+                    </Typography>
+                </div>
+                <Divider />
+
+                <div className="p-4">
+                    {result}
+                </div>
+            </section>
+
+
+            {show || error ? (
+                <div
+                    className='flex rounded-l-md shadow-lg flex-wrap py-2 gap-2 bg-[#1F2937] my-2 border border-gray-700'>
+                    {testResults.map((result, index) => (
+                        <div key={index} className={`${result ? 'border-green-600 bg-green-700' : 'border-red-600 bg-red-700'} border p-4 m-2 `} />
+                    ))}
+                </div>
+            ) : null}
+
         </section>
     );
 }

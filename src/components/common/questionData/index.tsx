@@ -11,14 +11,26 @@ interface IProps {
 }
 
 function QuestionData({ question }: IProps) {
-    const [code, setCode] = useState('');
+    const [codeJs, setCodeJs] = useState('');
+    const [codePython, setCodePython] = useState('');
+    const [isPython, setIsPython] = useState(false);
 
 
-    useEffect(() => { setCode(question.code) }, [question.code]);
+    useEffect(() => {
+        if (isPython)
+            setCodePython(question.codePython);
+        else
+            setCodeJs(question.codeJs);
+
+    }, [isPython, question]);
 
     const handleCodeEditorChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
-        setCode(value);
-    }, []);
+        if (isPython) {
+            setCodePython(value);
+        } else {
+            setCodeJs(value);
+        }
+    }, [isPython]);
 
     return (
         <div className="w-full flex lg:flex-row h-full">
@@ -34,13 +46,16 @@ function QuestionData({ question }: IProps) {
                 <CodeEditor
                     height="520px"
                     width="100%"
-                    isPython={false}
+                    isPython={isPython}
                     onChange={handleCodeEditorChange}
-                    value={code}
+                    value={isPython ? codePython : codeJs}
+                    className="shadow-md"
                 />
 
                 <CodeChecker
-                    userCode={code}
+                    isPython={isPython}
+                    setIsPython={setIsPython}
+                    userCode={isPython ? codePython : codeJs}
                     question={question}
                 />
             </div>

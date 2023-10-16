@@ -12,10 +12,11 @@ interface IProps {
     height: string;
     onChange(value: string, viewUpdate: ViewUpdate): void;
     value: string;
+    className?: string;
 }
 
 
-function CodeEditor({ isPython, width, height, onChange, value }: IProps) {
+function CodeEditor({ isPython, width, height, onChange, value, className }: IProps) {
 
     return (
         <CodeMirror
@@ -26,6 +27,7 @@ function CodeEditor({ isPython, width, height, onChange, value }: IProps) {
             extensions={[isPython ? python() : javascript()]}
             onChange={onChange}
             style={{ fontSize: '13pt' }}
+            className={className}
         />
     );
 }

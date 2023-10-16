@@ -10,7 +10,8 @@ interface ICreateQuestionParams {
     title: string;
     description?: string;
     detailedDescription: string;
-    code: string;
+    codeJs: string;
+    codePython: string;
     topicId: string;
     difficultyId: string;
     classId?: string;

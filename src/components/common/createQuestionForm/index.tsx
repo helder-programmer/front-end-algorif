@@ -29,7 +29,8 @@ function CreateQuestionForm() {
             topicId: '',
             title: '',
             description: '',
-            code: isPython ? codePython : codeJs,
+            codeJs: '',
+            codePython: '',
             detailedDescription: '',
             difficultyId: '',
             tests: [
@@ -105,8 +106,12 @@ function CreateQuestionForm() {
     }
 
     const handleCodeEditorChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
-        formik.setValues({ ...formik.values, code: value });
-    }, [formik]);
+        if (isPython) {
+            formik.setValues({ ...formik.values, codePython: value });
+        } else {
+            formik.setValues({ ...formik.values, codeJs: value });
+        }
+    }, [formik, isPython]);
 
 
     let consoleWritten: any[] = [];
@@ -119,7 +124,7 @@ function CreateQuestionForm() {
 
     const outputResult = () => {
         try {
-            const code = formik.values.code;
+            const code = formik.values.codeJs;
             eval(code);
             const result = consoleWritten.map(line => line).join("\n");
             consoleWritten = [];
@@ -136,8 +141,9 @@ function CreateQuestionForm() {
 
 
     useEffect(() => {
-        formik.setValues({ ...formik.values, code: isPython ? codePython : codeJs });
-    }, [isPython, formik]);
+        formik.setValues({ ...formik.values, codeJs, codePython });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     return (
@@ -242,7 +248,7 @@ function CreateQuestionForm() {
                         onChange={handleCodeEditorChange}
                         width="60vw"
                         height="518px"
-                        value={formik.values.code}
+                        value={isPython ? formik.values.codePython : formik.values.codeJs}
                     />
 
                     <div className='w-[40%]'>
@@ -298,7 +304,7 @@ function CreateQuestionForm() {
                             margin="normal"
                             variant="outlined"
                             fullWidth
-                            required                    
+                            required
                             onBlur={formik.handleBlur}
                             onChange={formik.handleChange}
                             value={test.output}

@@ -6,7 +6,8 @@ export interface IQuestion {
     title: string;
     description: string;
     detailedDescription: string;
-    code: string;
+    codeJs: string;
+    codePython: string;
     createdAt: Date;
     updatedAt: Date;
     classId: string;
